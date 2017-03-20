@@ -1,10 +1,11 @@
 # validate.js
 
-validate.js is a lightweight JavaScript form validation library inspired by CodeIgniter.
+yavjs is a fork of validate.js and is lightweight JavaScript form validation library.
 
 ## Features
 
 - Validate form fields from over a dozen rules
+- Can call manually field validation and form validation
 - No dependencies
 - Customizable Messages
 - Supply your own validation callbacks for custom rules
@@ -55,12 +56,8 @@ You can view everything at http://rickharrison.github.com/validate.js
 It is published to npm under validate-js
 
 ```
-npm install validate-js
+npm install yavjs
 ```
-
-## Plugins
-
-jQuery: https://github.com/magizh/validate_helper
 
 ## Multi-Language Support
 

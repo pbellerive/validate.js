@@ -1,9 +1,8 @@
 /*
- * validate.js 2.0.1
- * Copyright (c) 2011 - 2015 Rick Harrison, http://rickharrison.me
- * validate.js is open sourced under the MIT license.
- * Portions of validate.js are inspired by CodeIgniter.
- * http://rickharrison.github.com/validate.js
+ * yavjs fork of validate.js 2.0.1
+ * Copyright (c) 2017  Patrick Bellerive
+ * yavjs is open sourced under the MIT license.
+ * is a fork of validate.js of http://rickharrison.github.com/validate.js
  */
 
 (function(window, document, undefined) {
@@ -11,36 +10,69 @@
      * If you would like an application-wide config, change these defaults.
      * Otherwise, use the setMessage() function to configure form specific messages.
      */
-
     var defaults = {
         messages: {
-            required: 'The %s field is required.',
-            matches: 'The %s field does not match the %s field.',
-            "default": 'The %s field is still set to default, please change.',
-            valid_email: 'The %s field must contain a valid email address.',
-            valid_emails: 'The %s field must contain all valid email addresses.',
-            min_length: 'The %s field must be at least %s characters in length.',
-            max_length: 'The %s field must not exceed %s characters in length.',
-            exact_length: 'The %s field must be exactly %s characters in length.',
-            greater_than: 'The %s field must contain a number greater than %s.',
-            less_than: 'The %s field must contain a number less than %s.',
-            alpha: 'The %s field must only contain alphabetical characters.',
-            alpha_numeric: 'The %s field must only contain alpha-numeric characters.',
-            alpha_dash: 'The %s field must only contain alpha-numeric characters, underscores, and dashes.',
-            numeric: 'The %s field must contain only numbers.',
-            integer: 'The %s field must contain an integer.',
-            decimal: 'The %s field must contain a decimal number.',
-            is_natural: 'The %s field must contain only positive numbers.',
-            is_natural_no_zero: 'The %s field must contain a number greater than zero.',
-            valid_ip: 'The %s field must contain a valid IP.',
-            valid_base64: 'The %s field must contain a base64 string.',
-            valid_credit_card: 'The %s field must contain a valid credit card number.',
-            is_file_type: 'The %s field must contain only %s files.',
-            valid_url: 'The %s field must contain a valid URL.',
-            greater_than_date: 'The %s field must contain a more recent date than %s.',
-            less_than_date: 'The %s field must contain an older date than %s.',
-            greater_than_or_equal_date: 'The %s field must contain a date that\'s at least as recent as %s.',
-            less_than_or_equal_date: 'The %s field must contain a date that\'s %s or older.'
+            en : {
+                required: 'The %s field is required.',
+                matches: 'The %s field does not match the %s field.',
+                "default": 'The %s field is still set to default, please change.',
+                valid_email: 'The %s field must contain a valid email address.',
+                valid_emails: 'The %s field must contain all valid email addresses.',
+                min_length: 'The %s field must be at least %s characters in length.',
+                max_length: 'The %s field must not exceed %s characters in length.',
+                exact_length: 'The %s field must be exactly %s characters in length.',
+                greater_than: 'The %s field must contain a number greater than %s.',
+                less_than: 'The %s field must contain a number less than %s.',
+                alpha: 'The %s field must only contain alphabetical characters.',
+                alpha_numeric: 'The %s field must only contain alpha-numeric characters.',
+                alpha_dash: 'The %s field must only contain alpha-numeric characters, underscores, and dashes.',
+                numeric: 'The %s field must contain only numbers.',
+                integer: 'The %s field must contain an integer.',
+                decimal: 'The %s field must contain a decimal number.',
+                is_natural: 'The %s field must contain only positive numbers.',
+                is_natural_no_zero: 'The %s field must contain a number greater than zero.',
+                valid_ip: 'The %s field must contain a valid IP.',
+                valid_base64: 'The %s field must contain a base64 string.',
+                valid_credit_card: 'The %s field must contain a valid credit card number.',
+                is_file_type: 'The %s field must contain only %s files.',
+                valid_url: 'The %s field must contain a valid URL.',
+                greater_than_date: 'The %s field must contain a more recent date than %s.',
+                less_than_date: 'The %s field must contain an older date than %s.',
+                greater_than_or_equal_date: 'The %s field must contain a date that\'s at least as recent as %s.',
+                less_than_or_equal_date: 'The %s field must contain a date that\'s %s or older.'
+            },
+            fr : {
+                required: 'Le champ %s est requis.',
+                matches: 'Le champ %s ne correspond pas au champ %s.',
+                "default": 'Le champ %s est a la valeur par défaut, s.v.p corriger.',
+                valid_email: 'Le champ %s doit contenir un courriel valide.',
+                valid_emails: 'Les champs %s doivent contenir des adresses valides.',
+                min_length: 'Le champ %s doit avoir un minimum de %s caractères.',
+                max_length: 'Le champ %s ne doit pas dépasser %s caractères.',
+                exact_length: 'Le champ %s doit avoir exactement %s caractères.',
+                greater_than: 'Le champ %s doit contenir un nombre plus grand que %s.',
+                less_than: 'Le champ %s doit contenir un nombre plus petit que %s.',
+                alpha: 'Le champ %s doit contenir seulement des lettres.',
+                alpha_numeric: 'Le champ %s doit contenir seulement des lettres et des chiffres.',
+                alpha_dash: 'Le champ %s doit contenir seulement des lettres, chiffres,' +
+                ' barres de soulignement,' +
+                ' et' +
+                ' des tirets.',
+                numeric: 'Le champ %s doit contenir seulement des chiffres.',
+                integer: 'Le champ %s doit contenir seulement des entier.',
+                decimal: 'Le champ %s doit contenir seulement des décimales.',
+                is_natural: 'Le champ %s doit contenir seulement des nombres positifs.',
+                is_natural_no_zero: 'Le champ %s doit contenir un nombre plus grand que zéro.',
+                valid_ip: 'Le champ %s doit contenir un adresse ip valide.',
+                valid_base64: 'Le champ %s doit contenir un chaine base64.',
+                valid_credit_card: 'Le champ %s un numéro de carte de crédit valide.',
+                is_file_type: 'Le champ %s doit contenir seulement %s fichier.',
+                valid_url: 'Le champ %s doit contenir un url valide.',
+                greater_than_date: 'Le champ %s doit contenir une date plus récente que %s.',
+                less_than_date: 'Le champ %s une date antérieure à %s.',
+                greater_than_or_equal_date: 'Le champ %s doit contenir une date plus récente ou égale à %s.',
+                less_than_or_equal_date: 'Le champ %s doit contenir une date antérieure ou égale à %s.'
+            }
         },
         callback: function(errors) {
 
@@ -82,6 +114,7 @@
      */
 
     var FormValidator = function(formNameOrNode, fields, callback) {
+        this.locale = defaults.messages[navigator.language]== 'undefined' ? 'en' : navigator.language;
         this.callback = callback || defaults.callback;
         this.errors = [];
         this.fields = {};
@@ -114,6 +147,8 @@
             }
         }
 
+       // if (typeof this.form !)
+
         /*
          * Attach an event callback for the form submission
          */
@@ -123,7 +158,7 @@
         this.form.onsubmit = (function(that) {
             return function(evt) {
                 try {
-                    return that._validateForm(evt) && (_onsubmit === undefined || _onsubmit());
+                    return that.validateForm(evt) && (_onsubmit === undefined || _onsubmit());
                 } catch(e) {}
             };
         })(this);
@@ -150,8 +185,8 @@
      * Sets a custom message for one of the rules
      */
 
-    FormValidator.prototype.setMessage = function(rule, message) {
-        this.messages[rule] = message;
+    FormValidator.prototype.setMessage = function(locale, rule, message) {
+        this.messages[locale][rule] = message;
 
         // return this for chaining
         return this;
@@ -256,24 +291,25 @@
     };
 
     /*
-     * @private
+     * @public
      * Runs the validation when the form is submitted.
+     * Can be call manually without the raise of the submit event
      */
 
-    FormValidator.prototype._validateForm = function(evt) {
+    FormValidator.prototype.validateForm = function(evt) {
         this.errors = [];
 
         for (var key in this.fields) {
             if (this.fields.hasOwnProperty(key)) {
-                var field = this.fields[key] || {},
-                    element = this.form[field.name];
+                var field = this.fields[key] || {};
+                    // element = this.form[field.name];
 
-                if (element && element !== undefined) {
-                    field.id = attributeValue(element, 'id');
-                    field.element = element;
-                    field.type = (element.length > 0) ? element[0].type : element.type;
-                    field.value = attributeValue(element, 'value');
-                    field.checked = attributeValue(element, 'checked');
+                // if (element && element !== undefined) {
+                //     field.id = attributeValue(element, 'id');
+                //     field.element = element;
+                //     field.type = (element.length > 0) ? element[0].type : element.type;
+                //     field.value = attributeValue(element, 'value');
+                //     field.checked = attributeValue(element, 'checked');
 
                     /*
                      * Run through the rules for each field.
@@ -283,16 +319,16 @@
 
                     if (field.depends && typeof field.depends === "function") {
                         if (field.depends.call(this, field)) {
-                            this._validateField(field);
+                            this.validateField(field);
                         }
                     } else if (field.depends && typeof field.depends === "string" && this.conditionals[field.depends]) {
                         if (this.conditionals[field.depends].call(this,field)) {
-                            this._validateField(field);
+                            this.validateField(field);
                         }
                     } else {
-                        this._validateField(field);
+                        this.validateField(field);
                     }
-                }
+                // }
             }
         }
 
@@ -312,12 +348,38 @@
         return true;
     };
 
+    /**
+     * return the field or the field array depends on type.
+     * @param field
+     * @returns {*}
+     */
+    FormValidator.prototype.getFieldFromName = function (field) {
+        var theField = document.getElementsByName(field.name);
+        if ((field.type !== 'checkbox' || field.type != 'radio') && theField.length > 0) {
+            return theField[0];
+        }
+
+        return theField;
+    }
     /*
-     * @private
+     * @public
      * Looks at the fields value and evaluates it against the given rules
+     * @param field name of the field or field object, if name of the field is search in the field array
      */
 
-    FormValidator.prototype._validateField = function(field) {
+    FormValidator.prototype.validateField = function(field) {
+        if (typeof field == 'string') {
+            field = this.fields[field];
+        }
+
+        element = this.form[field.name] || this.getFieldFromName(field) || document.getElementById(field.name);
+        if (element && element !== undefined) {
+            field.id = attributeValue(element, 'id');
+            field.element = element;
+            field.type = (element.length > 0) ? element[0].type : element.type;
+            field.value = attributeValue(element, 'value');
+            field.checked = attributeValue(element, 'checked');
+
         var i, j, ruleLength,
             rules = field.rules.split('|'),
             indexOfRequired = field.rules.indexOf('required'),
@@ -378,40 +440,54 @@
              * If the hook failed, add a message to the errors array
              */
 
-            if (failed) {
-                // Make sure we have a message for this rule
-                var source = this.messages[field.name + '.' + method] || this.messages[method] || defaults.messages[method],
-                    message = 'An error has occurred with the ' + field.display + ' field.';
+                if (failed) {
+                    // Make sure we have a message for this rule
+                    var source = this.getErrorMessage(field, method),
+                        message = 'An error has occurred with the ' + field.display + ' field.';
 
-                if (source) {
-                    message = source.replace('%s', field.display);
+                    if (source) {
+                        message = source.replace('%s', field.display);
 
-                    if (param) {
-                        message = message.replace('%s', (this.fields[param]) ? this.fields[param].display : param);
+                        if (param) {
+                            message = message.replace('%s', (this.fields[param]) ? this.fields[param].display : param);
+                        }
                     }
-                }
 
-                var existingError;
-                for (j = 0; j < this.errors.length; j += 1) {
-                    if (field.id === this.errors[j].id) {
-                        existingError = this.errors[j];
+                    var existingError;
+                    for (j = 0; j < this.errors.length; j += 1) {
+                        if (field.id === this.errors[j].id) {
+                            existingError = this.errors[j];
+                        }
                     }
-                }
 
-                var errorObject = existingError || {
-                    id: field.id,
-                    display: field.display,
-                    element: field.element,
-                    name: field.name,
-                    message: message,
-                    messages: [],
-                    rule: method
-                };
-                errorObject.messages.push(message);
-                if (!existingError) this.errors.push(errorObject);
+                    var errorObject = existingError || {
+                        id: field.id,
+                        display: field.display,
+                        element: field.element,
+                        name: field.name,
+                        message: message,
+                        messages: [],
+                        rule: method
+                    };
+                    errorObject.messages.push(message);
+                    if (!existingError) this.errors.push(errorObject);
+
+                    return false; // for manual validation
+                }
             }
+
         }
+        return true;
     };
+
+    FormValidator.prototype.getErrorMessage = function (field, method) {
+        // this.messages[this.locale][field.name + '.' + method] || this.messages[this.locale][method] || defaults.messages[this.locale][method]
+        if (this.messages[this.locale]) {
+            return this.messages[this.locale][method] || defaults.messages[this.locale][method];
+        }
+
+        return defaults.messages[this.locale][method];
+    }
 
     /**
      * private function _getValidDate: helper function to convert a string date to a Date object
@@ -456,7 +532,7 @@
         },
 
         matches: function(field, matchName) {
-            var el = this.form[matchName];
+            var el = this.form[matchName] || document.getElementsByName(matchName)[0];
 
             if (el) {
                 return field.value === el.value;
